@@ -1,6 +1,7 @@
 package com.martinyuyy.thread;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import com.martinyuyy.lock.SynchronizedDemo;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -31,11 +32,17 @@ public class ThreadPoolExecutorDemo {
                 30000, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<Runnable>(1024), namedThreadFactory, new ThreadPoolExecutor.CallerRunsPolicy());
 
-        for (int i = 0; i < 5; i++) {
-            CallableDemo callableDemo = new CallableDemo();
-            Future submit = executorService.submit(callableDemo);
-            // 实现Callable接口创建的线程， 会有返回值， 调用get()方法会返回，执行结果， 调用该方法时会阻塞当前线程直到返回。
-            System.out.println(submit.get());
-        }
+//        for (int i = 0; i < 5; i++) {
+//            CallableDemo callableDemo = new CallableDemo();
+//            Future submit = executorService.submit(callableDemo);
+//            // 实现Callable接口创建的线程， 会有返回值， 调用get()方法会返回，执行结果， 调用该方法时会阻塞当前线程直到返回。
+//            System.out.println(submit.get());
+//        }
+
+        SynchronizedDemo demo = new SynchronizedDemo();
+
+        executorService.execute(() -> demo.test1());
+        executorService.execute(() -> demo.test2());
+
     }
 }

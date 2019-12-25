@@ -12,7 +12,7 @@ package com.martinyuyy.designpattern;
 
 public class SingletonDemo {
 
-    //step1 单例模式下，构造方法必须事私有的
+    //step1 单例模式下，构造方法必须是私有的
     private SingletonDemo(){
 
     }
