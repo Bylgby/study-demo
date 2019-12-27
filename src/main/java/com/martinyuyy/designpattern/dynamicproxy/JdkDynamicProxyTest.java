@@ -29,7 +29,7 @@ public class JdkDynamicProxyTest {
 
         System.out.println("-------------------第一种创建代理类方法--------------");
         //创建一个实例对象，这个对象是被代理的对象，委托类
-        Person person = new SoftwareEngineer();
+        Person person = new SoftwareEngineer("Martinyuyy");
         //创建一个与代理类相关联的InvocationHandler,每一个代理类都有一个关联的 InvocationHandler，并将代理类引用传递进去
         PersonInvocationHandler invocationHandler = new PersonInvocationHandler(person);
         //创建一个 代理对象 personProxy 来代理 person，创建的代理对象的每个执行方法都会被替换执行Invocation接口中的invoke方法
@@ -37,7 +37,6 @@ public class JdkDynamicProxyTest {
                 Person.class.getClassLoader(),
                 new Class[]{Person.class},
                 invocationHandler);
-        personProxy.setName("Martinyuyy");
         System.out.println("package = " + personProxy.getClass().getPackage() + " SimpleName = " + personProxy.getClass().getSimpleName() + " name =" + personProxy.getClass().getName() + " CanonicalName = " + "" + personProxy.getClass().getCanonicalName() + " 实现的接口 Interfaces = " + Arrays.toString(personProxy.getClass().getInterfaces()) + " superClass = " + personProxy.getClass().getSuperclass() + " methods =" + Arrays.toString(personProxy.getClass().getMethods()));
         // 通过 代理类 执行 委托类的代码逻辑
         personProxy.goWorking(personProxy.getName(), "深圳");

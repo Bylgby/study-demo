@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
  *
  * @author maxiaowei
  */
-@NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class SoftwareEngineer implements Person {
