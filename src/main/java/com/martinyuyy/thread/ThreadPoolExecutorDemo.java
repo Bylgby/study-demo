@@ -41,7 +41,7 @@ public class ThreadPoolExecutorDemo {
 
         SynchronizedDemo demo = new SynchronizedDemo();
 
-        executorService.execute(() -> demo.test1());
+        executorService.execute(() -> SynchronizedDemo.test1());
         executorService.execute(() -> demo.test2());
 
     }
