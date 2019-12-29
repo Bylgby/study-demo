@@ -22,12 +22,23 @@ public class SynchronizedDemo {
     }
 
     public synchronized void test2() {
-        System.out.println("lock Object");
+        System.out.println("lock Object2");
+        try {
+            test3();
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("lock Object2");
+    }
+
+    public synchronized void test3() {
+        System.out.println("lock Object3");
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("lock Object");
+        System.out.println("lock Object3");
     }
 }
