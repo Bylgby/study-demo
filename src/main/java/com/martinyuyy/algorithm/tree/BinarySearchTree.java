@@ -143,7 +143,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         inOrder(node.right);
     }
 
-    // 中序遍历
+    // 后序遍历
     public void postOrder(){
         postOrder(root);
     }
