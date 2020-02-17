@@ -1,7 +1,7 @@
 package com.martinyuyy.algorithm.tree;
 
 
-import java.util.Stack;
+import java.util.*;
 
 /**
  *
@@ -15,6 +15,8 @@ import java.util.Stack;
  * 前序遍历： 以根节点为基础先遍历左子树，再遍历右子树
  * 中序遍历： 先访问左子树，再访问该节点，最后访问右子树
  * 后序遍历： 先访问左子树，在访问右子树，最后访问该节点
+ *
+ * 层序遍历： 顾名思义，从根节点开始一层一层的往下遍历， 访问该节点的左孩子和右孩子
  * created date 2020/2/3 10:30
  *
  * @author maxiaowei
@@ -157,6 +159,190 @@ public class BinarySearchTree<E extends Comparable<E>> {
         System.out.println(node.e);
     }
 
+    // 层序遍历
+    public void levelOrder(){
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        while(! queue.isEmpty()){
+            Node cur = queue.remove();
+
+            System.out.println(cur.e);
+            if (cur.left != null) {
+                queue.add(cur.left);
+            }
+            if (cur.right != null) {
+                queue.add(cur.right);
+            }
+        }
+    }
+
+    // 寻找二分搜索数的最小节点
+    public E mininum(){
+        if (size == 0) {
+            throw new IllegalArgumentException("BST is empty!");
+        }
+        return mininum(root).e;
+    }
+
+    // 非递归实现，寻找二分搜索树的最小节点
+//    public E mininum(){
+//        if (size == 0) {
+//            throw new IllegalArgumentException("BST is empty!");
+//        }
+//        Node cur = root;
+//        while (cur.left == null) {
+//            cur = cur.left;
+//        }
+//        return cur.e;
+//    }
+
+    private Node mininum(Node node){
+        if (node.left == null) {
+            return node;
+        }
+        return mininum(node.left);
+    }
+
+    // 寻找二分搜索数的最小节点
+    public E maxnum(){
+        if (size == 0) {
+            throw new IllegalArgumentException("BST is empty!");
+        }
+        return maxnum(root).e;
+    }
+
+    private Node maxnum(Node node){
+        if (node.right == null) {
+            return node;
+        }
+        return maxnum(node.right);
+    }
+
+    // 删除树的最小节点
+    public E removeMini(){
+        E ret =mininum();
+        root = removeMini(root);
+        return ret;
+    }
+
+    // 递归删除最小节点
+    // 删除以node为跟节点的数中的最小节点
+    // 返回删除之后的新的二分搜索树的根
+    private Node removeMini(Node node) {
+        if (node.left == null) {
+            Node right = node.right;
+            node.right = null;
+            size--;
+            return right;
+        }
+        node.left = removeMini(node.left);
+        return node;
+    }
+
+    // 删除树的最大值
+    public E removeMax(){
+        E ret =maxnum();
+        root = removeMax(root);
+        return ret;
+    }
+
+    // 递归删除最大值
+    // 删除以node为跟节点的数中的最大节点
+    // 返回删除之后的新的二分搜索树的根
+    private Node removeMax(Node node) {
+        if (node.right == null) {
+            Node left = node.left;
+            node.left = null;
+            size--;
+            return left;
+        }
+        node.right = removeMax(node.right);
+        return node;
+    }
+
+    // 删除元素为e 的节点
+    public void remove(E e){
+        root = remove(root, e);
+    }
+
+    // 删除元素为e的节点， 递归算法
+    // 首先找到该节点的位置，然后找到该节点的右子树中的最小节点，用最小节点代替当前节点
+    // 后继
+//    private Node remove(Node node, E e) {
+//        if ( node == null ) {
+//            return null;
+//        }
+//
+//        if ( e.compareTo(node.e) < 0 ) {
+//            node.left = remove(node.left, e);
+//            return node;
+//        } else if ( e.compareTo(node.e) > 0 ) {
+//            node.right = remove(node.right, e);
+//            return node;
+//        } else { // ( e.compareTo(node.e) == 0 )
+//            if ( node.left == null ) {
+//                Node rightNode = node.right;
+//                node.right = null;
+//                size--;
+//                return rightNode;
+//            }
+//            if ( node.right == null ) {
+//                Node leftNode = node.left;
+//                node.left = null;
+//                size--;
+//                return leftNode;
+//            }
+//
+//            // 找到后继
+//            // 删除后继
+//            Node successor = mininum(node.right);
+//            successor.right = removeMini(node.right);
+//            successor.left = node.left;
+//
+//            node.right = node.left = null;
+//            return successor;
+//        }
+//    }
+
+    // 删除元素为e的节点， 递归算法
+    // 首先找到该节点的位置，然后找到该节点的右子树中的最小节点，用最小节点代替当前节点
+    // 前驱
+    private Node remove(Node node, E e) {
+        if ( node == null ) {
+            return null;
+        }
+
+        if ( e.compareTo(node.e) < 0 ) {
+            node.left = remove(node.left, e);
+            return node;
+        } else if ( e.compareTo(node.e) > 0 ) {
+            node.right = remove(node.right, e);
+            return node;
+        } else { // ( e.compareTo(node.e) == 0 )
+            if ( node.left == null ) {
+                Node rightNode = node.right;
+                node.right = null;
+                size--;
+                return rightNode;
+            }
+            if ( node.right == null ) {
+                Node leftNode = node.left;
+                node.left = null;
+                size--;
+                return leftNode;
+            }
+
+            // 找到前驱
+            // 删除前驱
+            Node precursor = maxnum(node.left);
+            precursor.left = removeMax(node.left);
+            precursor.right = node.right;
+
+            node.right = node.left = null;
+            return precursor;
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
@@ -185,12 +371,16 @@ public class BinarySearchTree<E extends Comparable<E>> {
 
     public static void main(String[] args) {
         BinarySearchTree<Integer> searchTree = new BinarySearchTree<>();
-        for (int i = 0; i < 5; i++) {
-            searchTree.add((int) (Math.random() * 100));
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            searchTree.add(random.nextInt(10000));
         }
-        searchTree.preOrder();
-        System.out.println("\n");
-        searchTree.preOrderNR();
+        ArrayList<Integer> nums = new ArrayList<>(100);
+        while (!searchTree.isEmpty()){
+            nums.add(searchTree.removeMax());
+        }
+
+        System.out.println(nums);
 
     }
 
