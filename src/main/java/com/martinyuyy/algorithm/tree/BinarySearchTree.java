@@ -343,6 +343,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         }
     }
 
+
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
@@ -373,7 +374,7 @@ public class BinarySearchTree<E extends Comparable<E>> {
         BinarySearchTree<Integer> searchTree = new BinarySearchTree<>();
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
-            searchTree.add(random.nextInt(10000));
+            searchTree.add(random.nextInt(100));
         }
         ArrayList<Integer> nums = new ArrayList<>(100);
         while (!searchTree.isEmpty()){

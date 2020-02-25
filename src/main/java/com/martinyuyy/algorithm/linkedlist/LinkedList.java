@@ -13,7 +13,7 @@ package com.martinyuyy.algorithm.linkedlist;
  *
  * @author maxiaowei
  */
-public class LinkedListDemo<E> {
+public class LinkedList<E> {
 
     private class Node {
         public E e;
@@ -42,7 +42,7 @@ public class LinkedListDemo<E> {
     private Node dummyHead;
     private int size;
 
-    public LinkedListDemo() {
+    public LinkedList() {
         dummyHead = new Node(null, null);
         size = 0;
     }
@@ -173,18 +173,30 @@ public class LinkedListDemo<E> {
         return remove(size);
     }
 
+    public void removeElement(E e){
+        Node prev = dummyHead;
+        while (prev.next != null){
+            Node cur = prev.next;
+            if (cur.e.equals(e)) {
+                prev.next = cur.next;
+                cur.next = null;
+                size--;
+                break;
+            }
+            prev = prev.next;
+        }
+    }
+
     public static void main(String[] args) {
-        LinkedListDemo<Integer> linkedList = new LinkedListDemo<>();
+        LinkedList<Integer> linkedList = new LinkedList<>();
         for (int i = 0; i < 5; i++) {
             linkedList.add(i);
             System.out.println(linkedList);
         }
-        linkedList.add(2, 666);
         System.out.println(linkedList);
-        linkedList.remove(2);
+        linkedList.removeElement(0);
         System.out.println(linkedList);
-        linkedList.removeFirst();
-        System.out.println(linkedList);
+        System.out.println(linkedList.getSize());
     }
 
 }

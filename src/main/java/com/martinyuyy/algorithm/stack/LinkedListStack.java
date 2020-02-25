@@ -1,6 +1,6 @@
 package com.martinyuyy.algorithm.stack;
 
-import com.martinyuyy.algorithm.linkedlist.LinkedListDemo;
+import com.martinyuyy.algorithm.linkedlist.LinkedList;
 
 
 /**
@@ -11,10 +11,10 @@ import com.martinyuyy.algorithm.linkedlist.LinkedListDemo;
  */
 public class LinkedListStack<E> implements Stack<E>{
 
-    private LinkedListDemo<E> list;
+    private LinkedList<E> list;
 
     public LinkedListStack(){
-        list = new LinkedListDemo<>();
+        list = new LinkedList<>();
     }
 
     @Override
