@@ -40,6 +40,19 @@ public class BinaryDemo {
         System.out.println(String.format("数字%d(%s)和数字%d(%s)的按位‘异或’结果是%d(%s)",
                 a, decimalToBinary(a), b, decimalToBinary(b), BinaryDemo.xor(a, b), decimalToBinary(BinaryDemo.xor(a, b))));  //获取十进制数53和35的按位“异或”
 
+        int[] arr = {1,3,2,3,2};
+
+
+        int res = 0;
+
+        res = 1^3^2^3^2;
+        System.out.println(res);
+        res = 0;
+        for (int i = 0; i < arr.length; i++) {
+            res ^= arr[i];
+        }
+
+        System.out.println(res);
     }
 
     /**
