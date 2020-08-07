@@ -344,6 +344,19 @@ public class BinarySearchTree<E extends Comparable<E>> {
     }
 
 
+    public void zhongxubianli(){
+        zhongxubianli(root);
+    }
+
+    private void zhongxubianli(Node node){
+        if (node == null) {
+            return;
+        }
+        zhongxubianli(node.left);
+        System.out.println(node.e);
+        zhongxubianli(node.right);
+    }
+
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
