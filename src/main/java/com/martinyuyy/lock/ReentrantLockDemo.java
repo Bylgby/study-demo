@@ -29,8 +29,8 @@ public class ReentrantLockDemo {
     public static void lockMethod() {
         Lock unfairLock = new ReentrantLock(false);
         try {
-            // 创建 Condition
             unfairLock.lock();
+            // 创建 Condition
             Condition condition = unfairLock.newCondition();
             System.out.println("开始wait");
             //通过创建Condition对象来使线程wait，必须先执行lock.lock方法获得锁
@@ -44,8 +44,8 @@ public class ReentrantLockDemo {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            // 释放锁
             unfairLock.unlock();
+            // 释放锁
         }
     }
 }
