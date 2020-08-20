@@ -12,7 +12,7 @@ package com.martinyuyy.lock;
 public class SynchronizedDemo {
 
     public static synchronized void test1() {
-        System.out.println("lock class");
+        System.out.println("lock class 1");
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
@@ -39,5 +39,23 @@ public class SynchronizedDemo {
             e.printStackTrace();
         }
         System.out.println("unlock Object3");
+    }
+
+    public static synchronized void test4() {
+        System.out.println("lock class 4");
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("lock class");
+    }
+
+    public static void main(String[] args) {
+        SynchronizedDemo synchronizedDemo = new SynchronizedDemo();
+        new Thread(SynchronizedDemo::test1).start();
+        new Thread(SynchronizedDemo::test4).start();
+        new Thread(synchronizedDemo::test2).start();
+        new Thread(synchronizedDemo::test3).start();
     }
 }
