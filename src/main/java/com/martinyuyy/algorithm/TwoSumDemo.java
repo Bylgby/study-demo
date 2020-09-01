@@ -1,5 +1,6 @@
 package com.martinyuyy.algorithm;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,9 +20,9 @@ import java.util.Map;
 public class TwoSumDemo {
 
     public static void main(String[] args) {
-        int[] nums = {2, 2, 9};
+        int[] nums = {2, 23, 9};
         int target = 11;
-        twoSum(nums, target);
+        System.out.println(Arrays.toString(twoSum(nums, target)));
 
     }
 
